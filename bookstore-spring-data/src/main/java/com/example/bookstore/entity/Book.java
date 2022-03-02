@@ -15,6 +15,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 @Entity
 @Table(name = "books")
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

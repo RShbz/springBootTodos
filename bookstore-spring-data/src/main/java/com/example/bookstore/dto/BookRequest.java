@@ -12,7 +12,7 @@ public class BookRequest {
 	private String author;
 	@NotBlank
 	private String title;
-	@Min(20)
+	@Min(2)
 	private int pages;
 	private int year;
 	private double price;

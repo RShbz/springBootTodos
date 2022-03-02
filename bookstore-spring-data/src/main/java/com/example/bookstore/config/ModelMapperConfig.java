@@ -2,6 +2,7 @@ package com.example.bookstore.config;
 
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,6 +12,7 @@ import com.example.bookstore.entity.Book;
 
 @Configuration
 public class ModelMapperConfig {
+	
 	private static final Converter<Book, BookResponse> BOOK_TO_BOOK_RESPONSE_CONVERTER =
 			context -> new BookResponse(
 					context.getSource().getId(), 
@@ -35,8 +37,9 @@ public class ModelMapperConfig {
 	@Bean("standardModelMapper")
 	ModelMapper createModelMapper() {
 		var modelMapper = new ModelMapper();
-		modelMapper.addConverter(BOOK_REQUEST_TO_BOOK_CONVERTER);
-		modelMapper.addConverter(BOOK_TO_BOOK_RESPONSE_CONVERTER);
+		modelMapper.addConverter(BOOK_REQUEST_TO_BOOK_CONVERTER,BookRequest.class,Book.class);
+		modelMapper.addConverter(BOOK_TO_BOOK_RESPONSE_CONVERTER, Book.class, BookResponse.class);
+		
 		return modelMapper;
 	}
 }

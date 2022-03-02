@@ -9,6 +9,8 @@ public class RestExceptionBase extends RuntimeException {
         super(message);
         this.messageId = messageId;
         this.debugId = debugId;
+        
+     
     }
 
     public String getMessageId() {

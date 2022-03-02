@@ -52,19 +52,22 @@ public class StandardBookCatalogService implements BookCatalogService {
 		return bookCatalogRepository.findAll(PageRequest.of(pageNo, pageSize))
 				                    .stream()
 				                    .map(book->modelMapper.map(book, BookResponse.class))
-				                    .sorted(Comparator.comparing(BookResponse::title))
+				                    .sorted(Comparator.comparing(BookResponse::getTitle))
 				                    .toList();
 	}
 
 	@Override
 	@Transactional
 	public BookResponse addBook(BookRequest book) {
+		
+	
 		try {
 			var managedBook = bookCatalogRepository.save(modelMapper.map(book, Book.class));
-			return modelMapper.map(book, BookResponse.class);
+			return modelMapper.map(managedBook, BookResponse.class);
 		} catch (Exception e) {
 			throw new RestExceptionBase("Cannot insert book!", "duplicate.isbn", "3");
 		}
+	
 	}
 
 	@Override

@@ -1,12 +1,15 @@
 package com.example.bookstore.exception;
 
-public class ErrorMessage {
-    private String messageId;
+public class ErrorMessage extends RuntimeException {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String messageId;
     private String debugId;
     private String message;
 
-    public ErrorMessage() {
-    }
+  
 
     public ErrorMessage(String messageId, String debugId, String message) {
         this.messageId = messageId;
